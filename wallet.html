@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Khalid's Funds Wallet - Educational Simulator</title>
+<title>Khalid's Funds Wallet</title>
 <style>
 body{font-family:Arial,sans-serif;background:#0f172a;color:#fff;margin:0;padding:15px}
 .banner{background:#ef4444;color:#fff;text-align:center;padding:10px;font-weight:bold;position:sticky;top:0;z-index:10}
@@ -20,7 +20,7 @@ th,td{padding:10px;border-bottom:1px solid #334155;text-align:left;font-size:14p
 </style>
 </head>
 <body>
-<div class="banner">⚠️ EDUCATIONAL SIMULATION - NOT A REAL BANK - NO REAL MONEY - FOR LEARNING ONLY ⚠️</div>
+<div class="banner">INVESTMENT  SIMULATION  BANK
 
 <div class="card">
 <h2>Khalid's Funds Wallet</h2>
@@ -30,13 +30,13 @@ th,td{padding:10px;border-bottom:1px solid #334155;text-align:left;font-size:14p
 </div>
 
 <div class="card">
-<h3>Add Funds (Demo)</h3>
+<h3>Add Funds ($) </h3>
 <input type="number" id="addAmount" placeholder="Type any amount e.g. 5000">
 <button onclick="addFunds()">Add to Balance</button>
 </div>
 
 <div class="card">
-<h3>Withdraw (Demo)</h3>
+<h3>Withdraw ($)</h3>
 <input type="number" id="withdrawAmount" placeholder="Type amount to withdraw">
 <button class="withdraw" onclick="withdrawFunds()">Withdraw</button>
 </div>
@@ -50,7 +50,7 @@ th,td{padding:10px;border-bottom:1px solid #334155;text-align:left;font-size:14p
 <button style="background:#334155;color:#fff;margin-top:10px" onclick="clearHistory()">Clear All History</button>
 </div>
 
-<div class="watermark">Khalid's Funds Wallet - Educational Simulator - Not a real financial institution</div>
+<div class="watermark">Khalid's Funds Wallet -  financial institution</div>
 
 <script>
 let balance = parseFloat(localStorage.getItem('kfw_balance') || '0');
@@ -80,7 +80,7 @@ function addFunds(){
 function withdrawFunds(){
  let amt=parseFloat(document.getElementById('withdrawAmount').value);
  if(!amt || amt<=0) return alert('Enter valid amount');
- if(amt>balance) return alert('Insufficient demo balance');
+ if(amt>balance) return alert('Insufficient  balance');
  balance-=amt;
  txs.push({date:new Date().toLocaleString(), type:'Withdrawal', amount:amt, bal:balance});
  document.getElementById('withdrawAmount').value='';
