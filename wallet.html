@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Khalid's Funds Wallet - Educational Simulator</title>
+<style>
+body{font-family:Arial,sans-serif;background:#0f172a;color:#fff;margin:0;padding:15px}
+.banner{background:#ef4444;color:#fff;text-align:center;padding:10px;font-weight:bold;position:sticky;top:0;z-index:10}
+.card{background:#1e293b;padding:20px;border-radius:12px;margin:15px 0}
+.balance{font-size:32px;font-weight:bold;color:#22c55e}
+input,button{padding:12px;border-radius:8px;border:none;margin:5px 0;width:100%;box-sizing:border-box}
+input{background:#334155;color:#fff}
+button{background:#22c55e;color:#000;font-weight:bold;cursor:pointer}
+button.withdraw{background:#ef4444;color:#fff}
+table{width:100%;border-collapse:collapse;margin-top:10px}
+th,td{padding:10px;border-bottom:1px solid #334155;text-align:left;font-size:14px}
+.deposit{color:#22c55e}.withdraw-text{color:#ef4444}
+.watermark{text-align:center;opacity:0.3;margin-top:20px;font-size:12px}
+</style>
+</head>
+<body>
+<div class="banner">⚠️ EDUCATIONAL SIMULATION - NOT A REAL BANK - NO REAL MONEY - FOR LEARNING ONLY ⚠️</div>
+
+<div class="card">
+<h2>Khalid's Funds Wallet</h2>
+<p>Current Balance</p>
+<div class="balance" id="balance">$0.00</div>
+<p style="font-size:12px;opacity:0.6">This is a demo balance stored only in your browser</p>
+</div>
+
+<div class="card">
+<h3>Add Funds (Demo)</h3>
+<input type="number" id="addAmount" placeholder="Type any amount e.g. 5000">
+<button onclick="addFunds()">Add to Balance</button>
+</div>
+
+<div class="card">
+<h3>Withdraw (Demo)</h3>
+<input type="number" id="withdrawAmount" placeholder="Type amount to withdraw">
+<button class="withdraw" onclick="withdrawFunds()">Withdraw</button>
+</div>
+
+<div class="card">
+<h3>Transaction History</h3>
+<table>
+<thead><tr><th>Date</th><th>Type</th><th>Amount</th><th>Balance</th></tr></thead>
+<tbody id="history"></tbody>
+</table>
+<button style="background:#334155;color:#fff;margin-top:10px" onclick="clearHistory()">Clear All History</button>
+</div>
+
+<div class="watermark">Khalid's Funds Wallet - Educational Simulator - Not a real financial institution</div>
+
+<script>
+let balance = parseFloat(localStorage.getItem('kfw_balance') || '0');
+let txs = JSON.parse(localStorage.getItem('kfw_txs') || '[]');
+
+function save(){ localStorage.setItem('kfw_balance', balance); localStorage.setItem('kfw_txs', JSON.stringify(txs)); render(); }
+
+function render(){
+ document.getElementById('balance').innerText = '$' + balance.toLocaleString('en-US',{minimumFractionDigits:2});
+ const tbody = document.getElementById('history'); tbody.innerHTML='';
+ txs.slice().reverse().forEach(t=>{
+   const tr=document.createElement('tr');
+   tr.innerHTML=`<td>${t.date}</td><td class="${t.type==='Deposit'?'deposit':'withdraw-text'}">${t.type}</td><td>${t.type==='Deposit'?'+':'-'}$${t.amount.toLocaleString()}</td><td>$${t.bal.toLocaleString()}</td>`;
+   tbody.appendChild(tr);
+ });
+}
+
+function addFunds(){
+ let amt=parseFloat(document.getElementById('addAmount').value);
+ if(!amt || amt<=0) return alert('Enter valid amount');
+ balance+=amt;
+ txs.push({date:new Date().toLocaleString(), type:'Deposit', amount:amt, bal:balance});
+ document.getElementById('addAmount').value='';
+ save();
+}
+
+function withdrawFunds(){
+ let amt=parseFloat(document.getElementById('withdrawAmount').value);
+ if(!amt || amt<=0) return alert('Enter valid amount');
+ if(amt>balance) return alert('Insufficient demo balance');
+ balance-=amt;
+ txs.push({date:new Date().toLocaleString(), type:'Withdrawal', amount:amt, bal:balance});
+ document.getElementById('withdrawAmount').value='';
+ save();
+}
+
+function clearHistory(){ if(confirm('Clear all demo history?')){ balance=0; txs=[]; save(); } }
+
+render();
+</script>
+</body>
+</html>
