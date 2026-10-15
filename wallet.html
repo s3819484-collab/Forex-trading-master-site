@@ -3,93 +3,105 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Khalid's Funds Wallet</title>
+<title>Khalid's Crypto Learning Demo</title>
 <style>
-body{font-family:Arial,sans-serif;background:#0f172a;color:#fff;margin:0;padding:15px}
-.banner{background:#ef4444;color:#fff;text-align:center;padding:10px;font-weight:bold;position:sticky;top:0;z-index:10}
-.card{background:#1e293b;padding:20px;border-radius:12px;margin:15px 0}
-.balance{font-size:32px;font-weight:bold;color:#22c55e}
-input,button{padding:12px;border-radius:8px;border:none;margin:5px 0;width:100%;box-sizing:border-box}
-input{background:#334155;color:#fff}
-button{background:#22c55e;color:#000;font-weight:bold;cursor:pointer}
-button.withdraw{background:#ef4444;color:#fff}
-table{width:100%;border-collapse:collapse;margin-top:10px}
-th,td{padding:10px;border-bottom:1px solid #334155;text-align:left;font-size:14px}
-.deposit{color:#22c55e}.withdraw-text{color:#ef4444}
-.watermark{text-align:center;opacity:0.3;margin-top:20px;font-size:12px}
+body{margin:0;background:#0a0a0a;color:#fff;font-family:Arial,sans-serif}
+.banner{background:#ef4444;color:#fff;text-align:center;padding:10px;font-weight:bold;position:sticky;top:0;z-index:100}
+header{display:flex;justify-content:space-between;padding:15px 20px;background:#111;align-items:center}
+header a{color:#fff;text-decoration:none;margin:0 10px;font-size:14px}
+.btn{background:#ff2a2a;color:#fff;padding:10px 18px;border-radius:6px;text-decoration:none;font-weight:bold}
+.hero{padding:60px 20px;text-align:center;background:linear-gradient(135deg,#111 0%,#222 100%)}
+.hero h1{font-size:32px;margin:10px 0}
+.hero p{opacity:0.7;max-width:600px;margin:10px auto}
+.card{background:#1a1a1a;padding:20px;border-radius:12px;margin:15px;border:1px solid #333}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:15px;padding:20px}
+@media(max-width:700px){.grid{grid-template-columns:1fr}}
+.plan{border:1px solid #333;padding:20px;border-radius:12px;text-align:center}
+.plan h3{color:#ff5a5a}
+.note{font-size:11px;opacity:0.6;margin-top:8px}
 </style>
 </head>
 <body>
-<div class="banner">INVESTMENT  SIMULATION  BANK
+<div class="banner">⚠️ EDUCATIONAL SIMULATION ONLY - NOT A REAL INVESTMENT PLATFORM - NO REAL MONEY ⚠️</div>
 
-<div class="card">
-<h2>Khalid's Funds Wallet</h2>
-<p>Current Balance</p>
-<div class="balance" id="balance">$0.00</div>
-<p style="font-size:12px;opacity:0.6">PROFIT ACCUMULATED</p>
+<header>
+<div><b>SPEEDLEARN</b> Global Demo</div>
+<div>
+<a href="#plans">Learning Plans</a>
+<a href="wallet.html" class="btn">Open Demo Wallet</a>
+</div>
+</header>
+
+<div class="hero">
+<h1>Professional Approach To Crypto Learning</h1>
+<p>This is an educational demo website to learn how crypto dashboards are built. You can practice with virtual balance, not real money.</p>
+<a href="wallet.html" class="btn">Start Learning Simulation</a>
 </div>
 
-<div class="card">
-<h3>Add Funds ($) </h3>
-<input type="number" id="addAmount" placeholder="Type any amount e.g. 5000">
-<button onclick="addFunds()">Add to Balance</button>
-</div>
-
-<div class="card">
-<h3>Withdraw ($)</h3>
-<input type="number" id="withdrawAmount" placeholder="Type amount to withdraw">
-<button class="withdraw" onclick="withdrawFunds()">Withdraw</button>
-</div>
-
-<div class="card">
-<h3>Transaction History</h3>
-<table>
-<thead><tr><th>Date</th><th>Type</th><th>Amount</th><th>Balance</th></tr></thead>
-<tbody id="history"></tbody>
-</table>
-<button style="background:#334155;color:#fff;margin-top:10px" onclick="clearHistory()">Clear All History</button>
-</div>
-
-<div class="watermark">Khalid's Funds Wallet -  financial institution</div>
-
-<script>
-let balance = parseFloat(localStorage.getItem('kfw_balance') || '0');
-let txs = JSON.parse(localStorage.getItem('kfw_txs') || '[]');
-
-function save(){ localStorage.setItem('kfw_balance', balance); localStorage.setItem('kfw_txs', JSON.stringify(txs)); render(); }
-
-function render(){
- document.getElementById('balance').innerText = '$' + balance.toLocaleString('en-US',{minimumFractionDigits:2});
- const tbody = document.getElementById('history'); tbody.innerHTML='';
- txs.slice().reverse().forEach(t=>{
-   const tr=document.createElement('tr');
-   tr.innerHTML=`<td>${t.date}</td><td class="${t.type==='Deposit'?'deposit':'withdraw-text'}">${t.type}</td><td>${t.type==='Deposit'?'+':'-'}$${t.amount.toLocaleString()}</td><td>$${t.bal.toLocaleString()}</td>`;
-   tbody.appendChild(tr);
- });
+<!-- LIVE CRYPTO TICKER - Real widget from TradingView -->
+<div style="padding:10px;background:#000">
+<div class="tradingview-widget-container">
+<div class="tradingview-widget-container__widget"></div>
+<script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+{
+"symbols": [{"proName": "BINANCE:BTCUSDT","title": "Bitcoin"},{"proName": "BINANCE:ETHUSDT","title": "Ethereum"},{"proName": "BINANCE:BNBUSDT","title": "BNB"}],
+"showSymbolLogo": true,
+"colorTheme": "dark",
+"isTransparent": true,
+"displayMode": "adaptive"
 }
-
-function addFunds(){
- let amt=parseFloat(document.getElementById('addAmount').value);
- if(!amt || amt<=0) return alert('Enter valid amount');
- balance+=amt;
- txs.push({date:new Date().toLocaleString(), type:'Deposit', amount:amt, bal:balance});
- document.getElementById('addAmount').value='';
- save();
-}
-
-function withdrawFunds(){
- let amt=parseFloat(document.getElementById('withdrawAmount').value);
- if(!amt || amt<=0) return alert('Enter valid amount');
- if(amt>balance) return alert('Insufficient  balance');
- balance-=amt;
- txs.push({date:new Date().toLocaleString(), type:'Withdrawal', amount:amt, bal:balance});
- document.getElementById('withdrawAmount').value='';
- save();
-}
-
-function clearHistory(){ if(confirm('Clear all demo history?')){ balance=0; txs=[]; save(); } }
-
-render();
 </script>
+</div>
+</div>
+
+<div class="card" style="margin:20px">
+<h2>Grow Your Crypto Knowledge With Us</h2>
+<p style="opacity:0.8">Our mission is to teach how blockchain and crypto dashboards work through technology simulations. This demo lets you understand balance, transactions, and market data without any risk.</p>
+</div>
+
+<div style="padding:20px"><h2 id="plans">Our Simulation Learning Plans</h2><p style="opacity:0.6">These are NOT real investments. They are examples of how plans are displayed for learning.</p></div>
+
+<div class="grid">
+<div class="plan">
+<h3>10% BASIC - SIMULATION</h3>
+<p>Min: $100 (Virtual)</p>
+<p>Duration: 12 Hours Simulation</p>
+<p class="note">For learning UI only</p>
+<a href="wallet.html" class="btn">Try in Demo Wallet</a>
+</div>
+<div class="plan">
+<h3>30% STANDARD - SIMULATION</h3>
+<p>Min: $1000 (Virtual)</p>
+<p>Duration: 24 Hours Simulation</p>
+<p class="note">For learning UI only</p>
+<a href="wallet.html" class="btn">Try in Demo Wallet</a>
+</div>
+<div class="plan">
+<h3>45% PLATINUM - SIMULATION</h3>
+<p>Min: $3000 (Virtual)</p>
+<p>Duration: 48 Hours Simulation</p>
+<p class="note">For learning UI only</p>
+<a href="wallet.html" class="btn">Try in Demo Wallet</a>
+</div>
+<div class="plan">
+<h3>60% GOLD - SIMULATION</h3>
+<p>Min: $5000 (Virtual)</p>
+<p>Duration: 72 Hours Simulation</p>
+<p class="note">For learning UI only</p>
+<a href="wallet.html" class="btn">Try in Demo Wallet</a>
+</div>
+</div>
+
+<div class="card" style="text-align:center">
+<h3>Ready to Practice?</h3>
+<p>Open your personal demo wallet where you can add any virtual amount and practice withdrawals.</p>
+<a href="wallet.html" class="btn">Open Khalid's Funds Wallet</a>
+</div>
+
+<div style="text-align:center;padding:30px;opacity:0.4;font-size:12px">
+Khalid's Crypto Learning Demo - Educational Project - Not affiliated with any real investment company<br>
+All balances and transactions are virtual and stored only in your browser
+</div>
+
 </body>
 </html>
