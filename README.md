@@ -1,23 +1,21 @@
-# FOREX TRADING MASTER 📈
+# Forex Trading Master - Khalid fx
+### @Khalidfxmt5 | Forex & Gold Analyst
 
-**Stop Gambling. Start Trading Like Banks.**
+🌐 **Live Site:** https://s3819484-collab.github.io/Forex-trading-master-site/
+✈️ **Free Telegram:** https://t.me/forex_trading_masterfx
+🐦 **X (Twitter):** https://x.com/Khalidfxmt5
 
-Live Website: **https://s3819484-collab.github.io/Forex-trading-master-site/**
+**We don't gamble. We trade like banks.**
 
-Telegram: **https://t.me/forex_trading_masterfx**
+Specializing in #XAUUSD | Gold Signals | Price Action | Liquidity
 
-### What We Teach
-- 📊 Pure Price Action - No indicators
-- 💧 Liquidity Concepts - Stop hunts & Order Blocks
-- 🏦 Institutional Trading - BOS, CHOCH, Fair Value Gaps
+## Today's Result
+✅ #XAUUSD DONE HIT TP 140 PIPS
 
-### Our Stats
-- 500+ Members
-- 1500+ Pips Weekly
-- 24/7 Market Analysis
+## What You'll Get
+- Daily XAUUSD / GOLD Signals
+- Pure Price Action Breakdown
+- Liquidity & Order Block Analysis
+- 1500+ Pips Weekly Target
 
-### Join Us
-Click here to join free: https://t.me/forex_trading_masterfx
-
----
-© 2026 Forex Trading Master
+**Join 500+ traders:** t.me/forex_trading_masterfx
